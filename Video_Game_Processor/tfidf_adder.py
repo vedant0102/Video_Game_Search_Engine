@@ -6,10 +6,9 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 def load_tfidf_data(tfidf_index_path, cosine_similarities_path):
     """Loads TF-IDF vectorizer, matrix, and cosine similarities from files."""
-    with open(tfidf_index_path, 'rb') as f:
-        tfidf_vectorizer, tfidf_matrix = pickle.load(f)
-    with open(cosine_similarities_path, 'rb') as f:
-        cosine_similarities = pickle.load(f)
+    with open(tfidf_index_path, 'rb') as f1, open(cosine_similarities_path, 'rb') as f2:
+        tfidf_vectorizer, tfidf_matrix = pickle.load(f1)
+        cosine_similarities = pickle.load(f2)
     return tfidf_vectorizer, tfidf_matrix, cosine_similarities
 
 def search_similar_documents(query, tfidf_vectorizer, tfidf_matrix, cosine_similarities, documents, top_k):
@@ -20,16 +19,14 @@ def search_similar_documents(query, tfidf_vectorizer, tfidf_matrix, cosine_simil
     similar_documents = [(cosine_similarities[0][idx], documents.iloc[idx]['title'].strip()) for idx in most_similar_indices[:top_k]]
     return similar_documents , most_similar_indices[:top_k]
 
-def search_documents(query):
+def document_search_main(query):
     """Searches for documents using a specified query and data directory."""
     tfidf_index_path = 'C:\\Illinois Tech\\Sem 2\\Information Retrival\\Video_Game_Crawler\\Video_Game_Indexer\\tfidfVectorizer.pkl'
     cosine_similarities_path = 'C:\\Illinois Tech\\Sem 2\\Information Retrival\\Video_Game_Crawler\\Video_Game_Indexer\\cosine_similarity.pkl'
     documents_path = 'C:\Illinois Tech\Sem 2\Information Retrival\Video_Game_Crawler\Video_Game_Indexer\data.json'
 
-    # Load indexed data
+    # Load indexed data and documents
     tfidf_vectorizer, tfidf_matrix, cosine_similarities = load_tfidf_data(tfidf_index_path, cosine_similarities_path)
-
-    # Load documents from JSON
     documents_df = pd.read_json(documents_path)
 
     # Perform search
@@ -37,7 +34,6 @@ def search_documents(query):
 
     return search_results , index
 
-
 # Example usage (assuming you have the data files in the specified directory)
 query = "information retrieval"
-results = search_documents(query)
+results = document_search_main(query)

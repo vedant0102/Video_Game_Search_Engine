@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.route('/<query>', methods=['GET'])
 def search_result(query):
     # Call the search_documents function from tfidf_adder to get results and their indices
-    results, indices = tfidf_adder.search_documents(query)
+    results, indices = tfidf_adder.document_search_main(query)
 
     # Filter out None results
     filtered_results = [(result[0], result[1], idx) for result, idx in zip(results, indices) if result is not None]
