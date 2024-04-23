@@ -18,7 +18,7 @@ def search_similar_documents(query, tfidf_vectorizer, tfidf_matrix, cosine_simil
     query_cosine_similarities = cosine_similarity(query_vector, tfidf_matrix)
     most_similar_indices = query_cosine_similarities.argsort()[0][::-1]
     similar_documents = [(cosine_similarities[0][idx], documents.iloc[idx]['title'].strip()) for idx in most_similar_indices[:top_k]]
-    return similar_documents
+    return similar_documents , most_similar_indices[:top_k]
 
 def search_documents(query):
     """Searches for documents using a specified query and data directory."""
@@ -33,14 +33,11 @@ def search_documents(query):
     documents_df = pd.read_json(documents_path)
 
     # Perform search
-    search_results = search_similar_documents(query, tfidf_vectorizer, tfidf_matrix, cosine_similarities, documents_df, top_k=5)
+    search_results , index = search_similar_documents(query, tfidf_vectorizer, tfidf_matrix, cosine_similarities, documents_df, top_k=5)
 
-    return search_results
+    return search_results , index
 
 
 # Example usage (assuming you have the data files in the specified directory)
 query = "information retrieval"
 results = search_documents(query)
-
-for score, document in results:
-    print(f"Document: {document}, Similarity Score: {score:.4f}")
