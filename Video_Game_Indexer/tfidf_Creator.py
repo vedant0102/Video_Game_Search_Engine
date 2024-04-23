@@ -27,3 +27,5 @@ with open('C:\\Illinois Tech\\Sem 2\\Information Retrival\\Video_Game_Crawler\\V
 with open('C:\Illinois Tech\Sem 2\Information Retrival\Video_Game_Crawler\Video_Game_Indexer\cosine_similarity.pkl', 'wb') as f:
     # Dump the cosine similarity matrix into the pickle file
     pickle.dump(cos_sim, f)
+
+
