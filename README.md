@@ -277,7 +277,11 @@ To operate the system effectively, users need to understand the software command
 ![img_1.png](img_1.png)
 
 By following these steps, users can effectively run the project and interact with its components to retrieve relevant information from the web.
-
+**Testing**
+![img_4.png](img_4.png)
+![img_5.png](img_5.png)
+![img_6.png](img_6.png)
+![img_7.png](img_7.png)
 **Conclusion:**
 
 The completion of the project marks a significant milestone in the development of a web crawling, indexing, and query processing system for retrieving information from Wikipedia articles related to video games. Throughout the project, several successes and challenges were encountered, leading to valuable insights and outcomes.
