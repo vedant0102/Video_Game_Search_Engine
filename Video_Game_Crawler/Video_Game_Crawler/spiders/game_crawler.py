@@ -46,7 +46,7 @@ class GameCrawlerSpider(scrapy.Spider):
         }
         for link in response.css("div.mw-content-ltr p a::attr(href)").extract()[:10]:
             if link.startswith("/wiki/") and ':' not in link:
-                nextPage = response.urljoin(link)
-                yield scrapy.Request(nextPage, callback=self.parse)
+                yield response.follow(link, callback=self.parse)
+
 
 
