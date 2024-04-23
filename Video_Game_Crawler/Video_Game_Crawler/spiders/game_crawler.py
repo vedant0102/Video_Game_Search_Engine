@@ -11,8 +11,9 @@ class GameCrawlerSpider(scrapy.Spider):
     name = "game_crawler"
     allowed_domains = ["en.wikipedia.org"]
     custom_settings = {
-        'DEPTH_LIMIT': 3,
-        'MAX_PAGES': 300
+        'DEPTH_LIMIT': 4,
+        'MAX_PAGES': 500,
+        'CONCURRENT_REQUESTS': 8
     }
 
 
@@ -38,7 +39,6 @@ class GameCrawlerSpider(scrapy.Spider):
 
         self.count_of_pages += 1
         yield {
-            # "content": "".join(list(filter(lambda x : x != "\n", details.css("div.mw-content-ltr p::text").getall()))),
             "title": response.css("span.mw-page-title-main::text").get(),
             "content": "".join(content.css("p::text").getall()).replace("\n", ""),
             "link": response.url,

@@ -1,7 +1,8 @@
+from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
 import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+
 
 def load_tfidf_data(tfidf_index_path, cosine_similarities_path):
     """Loads TF-IDF vectorizer, matrix, and cosine similarities from files."""
